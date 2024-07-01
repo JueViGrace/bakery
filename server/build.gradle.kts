@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
-    alias(libs.plugins.sqldelight)
     alias(libs.plugins.kotlin.serialization)
     application
 }
@@ -16,6 +15,7 @@ application {
 dependencies {
 
     implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.config.yaml)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.status.pages)
     implementation(libs.ktor.server.cors)
@@ -29,19 +29,17 @@ dependencies {
     implementation(libs.ktor.server.caching.headers.jvm)
     implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.auth.jwt)
+    implementation(libs.ktor.server.auth.sessions)
 
     // Koin
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger)
 
-    // Sql-delight
-    implementation(libs.sqldelight.jdbc.driver)
-    implementation(libs.sqldelight.coroutines.extensions)
-    implementation(libs.sqldelight.async.extensions)
-
+    // Exposed
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
+    implementation(libs.exposed.java.time)
     implementation(libs.postgres)
     implementation(libs.hikari)
 
@@ -57,14 +55,4 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
-}
-
-sqldelight {
-    databases {
-        create("BakeryDB") {
-            packageName.set("com.bakery.web")
-            dialect(libs.sqldelight.dialect)
-        }
-    }
-    linkSqlite = false
 }

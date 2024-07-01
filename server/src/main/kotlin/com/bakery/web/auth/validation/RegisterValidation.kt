@@ -1,15 +1,13 @@
-package com.bakery.web.users.data.validation
+package com.bakery.web.auth.validation
 
+import com.bakery.web.auth.model.RegisterDto
 import com.bakery.web.common.Constants.emailRegex
 import com.bakery.web.common.validDate
-import com.bakery.web.users.data.model.UserDto
 import io.ktor.server.plugins.requestvalidation.*
 
-fun RequestValidationConfig.validateUserDto() {
-    validate<UserDto> { dto ->
+fun RequestValidationConfig.validateRegisterDto() {
+    validate<RegisterDto> { dto ->
         when {
-            dto.id == null -> ValidationResult.Invalid("Id must not be null")
-            dto.id <= 0 -> ValidationResult.Invalid("Id must be a valid id")
             dto.name.isEmpty() -> ValidationResult.Invalid("Name must not be empty")
             dto.lastname.isEmpty() -> ValidationResult.Invalid("Last name must not be empty")
             !emailRegex.matches(dto.email) -> ValidationResult.Invalid("Email must be a valid email")

@@ -4,5 +4,20 @@ GRANT ALL PRIVILEGES ON DATABASE bakery TO jvg_25;
 CREATE TABLE IF NOT EXISTS "public"."users"(
     id SERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
-    lastname VARCHAR(30) NOT NULL
+    lastname VARCHAR(30) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    birth_date TIMESTAMP NOT NULL WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    phone VARCHAR(25) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TYPE "public"."role" AS ENUM ('user', 'admin');
+
+CREATE TABLE IF NOT EXISTS "public"."user_credentials"(
+    user_id INTEGER NOT NULL PRIMARY KEY,
+    password TEXT NOT NULL,
+    role ROLE NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+

@@ -1,12 +1,8 @@
-package com.bakery.web.users.data.model
+package com.bakery.web.auth.model
 
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
-data class UserDto(
-    @SerialName("id")
-    val id: Int? = null,
+data class RegisterDto(
     @SerialName("name")
     val name: String,
     @SerialName("lastname")
@@ -17,6 +13,4 @@ data class UserDto(
     val birthDate: String,
     @SerialName("phone")
     val phone: String,
-    @SerialName("created_at")
-    val createdAt: String = "",
 )

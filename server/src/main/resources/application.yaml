@@ -1,0 +1,13 @@
+ktor:
+  environment: "development"
+  deployment:
+      port: 5000
+      host: "localhost"
+  application:
+    modules:
+      - com.bakery.web.app.ApplicationKt.module
+jwt:
+  secret: "secret"
+  issuer: "http://0.0.0.0:5000/"
+  audience: "http://0.0.0.0:5000/hello"
+  realm: "Access to 'hello'"

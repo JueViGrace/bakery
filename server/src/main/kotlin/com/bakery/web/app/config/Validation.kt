@@ -1,5 +1,7 @@
 package com.bakery.web.app.config
 
+import com.bakery.web.auth.validation.validateLoginDto
+import com.bakery.web.auth.validation.validateRegisterDto
 import com.bakery.web.users.data.validation.validateUserDto
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -8,6 +10,8 @@ import io.ktor.server.plugins.requestvalidation.*
 fun Application.configureValidation() {
     install(RequestValidation) {
         validateUserDto()
+        validateRegisterDto()
+        validateLoginDto()
         validate<Parameters> { parameters ->
             val errors = parameters["id"]?.map { it.isDigit() }
                 ?: emptyList<Boolean>().also {
