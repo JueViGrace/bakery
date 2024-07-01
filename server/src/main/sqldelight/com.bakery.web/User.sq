@@ -1,9 +1,30 @@
-CREATE TABLE IF NOT EXISTS user(
-    id INT NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users(
+    id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL DEFAULT '',
     lastname TEXT NOT NULL DEFAULT ''
 );
 
 findAll:
 SELECT *
-FROM user;
+FROM users;
+
+findOne:
+SELECT *
+FROM users
+WHERE users.id = :id;
+
+saveUser:
+INSERT INTO users (
+    id,
+    name,
+    lastname
+)
+VALUES ?
+ON CONFLICT (id) DO UPDATE
+SET
+    name = excluded.name,
+    lastname = excluded.lastname;
+
+deleteUser:
+DELETE FROM users
+WHERE id = :id;

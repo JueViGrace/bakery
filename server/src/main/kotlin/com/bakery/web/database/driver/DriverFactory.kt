@@ -1,13 +1,12 @@
 package com.bakery.web.database.driver
 
-import app.cash.sqldelight.db.SqlDriver
-import app.cash.sqldelight.driver.jdbc.asJdbcDriver
 import com.bakery.web.common.Constants.JDBC_DATABASE_URL
 import com.bakery.web.common.Constants.JDBC_DRIVER
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import org.jetbrains.exposed.sql.Database
 
-class DriverFactory {
+object DriverFactory {
     private val dataSource: HikariDataSource = HikariDataSource(
         HikariConfig().apply {
             jdbcUrl = JDBC_DATABASE_URL
@@ -21,7 +20,7 @@ class DriverFactory {
         }
     )
 
-    fun createDriver(): SqlDriver {
-        return dataSource.asJdbcDriver()
+    fun initDatabase() {
+        Database.connect(dataSource)
     }
 }

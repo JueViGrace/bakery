@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.json)
     implementation(libs.ktor.server.caching.headers)
+    implementation(libs.ktor.server.request.validation)
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.caching.headers.jvm)
     implementation(libs.ktor.server.auth)
@@ -37,6 +38,10 @@ dependencies {
     implementation(libs.sqldelight.jdbc.driver)
     implementation(libs.sqldelight.coroutines.extensions)
     implementation(libs.sqldelight.async.extensions)
+
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.dao)
+    implementation(libs.exposed.jdbc)
     implementation(libs.postgres)
     implementation(libs.hikari)
 
